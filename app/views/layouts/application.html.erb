@@ -12,7 +12,19 @@
     <ul class="nav nav-tabs">
       <li><%= link_to "Blocipedia", root_path %></li>
     </ul>
-
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+    <p class="navbar-text pull-right">
+    <% if user_signed_in? %>
+      Signed in as <%= current_user.name %></br>
+      <%= link_to 'Profile', edit_user_registration_path %> | <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to 'Sign Up', new_user_registration_path %> | <%= link_to 'Login', new_user_session_path %>
+    <% end %>
 <%= yield %>
 </div>
 
