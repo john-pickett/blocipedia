@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
 
-  after_create :send_confirm_email
+  #after_create :send_confirm_email
+
+  has_many :wikis
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
