@@ -5,7 +5,7 @@ require 'wiki_data'
   User.create!(
   name: "John",
   email: "john.pickett@gmail.com",
-  password: "password"
+  password: "password",
   )
 end
 john = User.first
