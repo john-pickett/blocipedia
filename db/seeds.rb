@@ -1,4 +1,5 @@
 require 'wiki_data'
+require 'user_data'
 
 #Create first user
 1.times do
@@ -9,6 +10,14 @@ require 'wiki_data'
   )
 end
 john = User.first
+
+9.times do
+  User.create!(
+  name: UserData.user_name,
+  email: UserData.user_email,
+  password: "password"
+  )
+end
 
 #Create Wikis
 25.times do
