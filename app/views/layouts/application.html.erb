@@ -21,13 +21,6 @@
           <li class="pull-right"><%= link_to 'Login', new_user_session_path %></li>
         <% end %>
     </ul>
-    <% if user_signed_in? %>
-      <div class="pull-right text-center">
-        <h2>User Profile</h2>
-        <h4>Currently signed in as: <strong><%= current_user.name %></strong></h4>
-        <h4>Role: <%= current_user.role.capitalize %></h4>
-      </div>
-    <% end %>
   </div>
     <% if notice %>
       <p class="alert alert-success"><%= notice %></p>
@@ -39,5 +32,6 @@
 <%= yield %>
 </div>
 
+<footer></footer>
 </body>
 </html>
