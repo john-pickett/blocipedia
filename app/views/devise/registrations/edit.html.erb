@@ -56,7 +56,10 @@
         <%= current_user.name %></strong></p>
       <p><strong>Account Status: </strong><br>
         <%= current_user.role.capitalize %></p>
-      <%= link_to "Upgrade Account", new_user_session_path, class: 'btn btn-success' %>
-      <%= link_to "Downgrade Account", new_user_session_path, class: 'btn btn-danger' %>
+        <% if current_user.standard? %>
+          <%= link_to "Upgrade Account", new_charge_path, class: 'btn btn-success' %>
+        <% else %>
+          <%= link_to "Downgrade Account", downgrade_path, class: 'btn btn-danger', data: { confirm: "Do you really want to downgrade your account?" } %>
+        <% end %>
   </div>
 </div>

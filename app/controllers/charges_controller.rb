@@ -17,10 +17,10 @@ class ChargesController < ApplicationController
    )
 
    # Upgrade user goes here
-
+    current_user.premium!
 
    flash[:notice] = "Thanks for all the money, #{current_user.email}! Feel free to pay me again."
-   redirect_to user_path(current_user) # or wherever
+   redirect_to current_user # or wherever
 
    # Stripe will send back CardErrors, with friendly messages
    # when something goes wrong.
@@ -36,6 +36,11 @@ class ChargesController < ApplicationController
      description: "BigMoney Membership - #{current_user.name}",
      amount: Amount.default
    }
+ end
+
+ def downgrade
+   current_user.standard!
+   redirect_to current_user
  end
 
 end
