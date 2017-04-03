@@ -4,6 +4,7 @@ class WikisController < ApplicationController
     @wikis = Wiki.all
     @public_wikis = @wikis.public_wikis(@wikis)
     @private_wikis = @wikis.private_wikis(@wikis)
+    @user_wikis = @wikis.user_wikis(current_user.id)
   end
 
   def show
@@ -11,10 +12,12 @@ class WikisController < ApplicationController
   end
 
   def new
+    @user = current_user
     @wiki = Wiki.new
   end
 
   def create
+    @user = current_user
     @wiki = Wiki.new(wiki_params)
 
     if @wiki.save
@@ -57,7 +60,7 @@ class WikisController < ApplicationController
   private
 
   def wiki_params
-    params.require(:wiki).permit(:title, :body, :private)
+    params.require(:wiki).permit(:user_id, :title, :body, :private)
   end
 
 end
