@@ -59,7 +59,7 @@
         <% if current_user.standard? %>
           <%= link_to "Upgrade Account", new_charge_path, class: 'btn btn-success' %>
         <% else %>
-          <%= link_to "Downgrade Account", downgrade_path, class: 'btn btn-danger', data: { confirm: "Do you really want to downgrade your account?" } %>
+          <%= link_to "Downgrade Account", downgrade_path, class: 'btn btn-danger', data: { confirm: "Do you really want to downgrade your account? All of your private wikis will be made public." } %>
         <% end %>
   </div>
 </div>
