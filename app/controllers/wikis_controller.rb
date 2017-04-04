@@ -2,8 +2,9 @@ class WikisController < ApplicationController
 
   def index
     @wikis = Wiki.all
+    @private_wikis = @wikis.visible_to(current_user)
+    @user_wikis = @wikis.user_wikis(current_user)
     @public_wikis = @wikis.public_wikis(@wikis)
-    @private_wikis = @wikis.private_wikis(@wikis)
   end
 
   def show
@@ -11,11 +12,14 @@ class WikisController < ApplicationController
   end
 
   def new
+    @user = current_user
     @wiki = Wiki.new
   end
 
   def create
+    @user = current_user
     @wiki = Wiki.new(wiki_params)
+    @wiki.user = current_user
 
     if @wiki.save
       redirect_to @wiki, notice: "Wiki saved!"
@@ -57,7 +61,7 @@ class WikisController < ApplicationController
   private
 
   def wiki_params
-    params.require(:wiki).permit(:title, :body, :private)
+    params.require(:wiki).permit(:user_id, :title, :body, :private)
   end
 
 end

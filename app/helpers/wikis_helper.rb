@@ -1,6 +1,2 @@
 module WikisHelper
-
-  
-
-
 end

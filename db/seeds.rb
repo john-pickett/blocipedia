@@ -18,14 +18,25 @@ john = User.first
   password: "password"
   )
 end
+users = User.all
 
-#Create Wikis
+#Create Private Wikis
+25.times do
+  Wiki.create!(
+  title: WikiData.wiki_title,
+  body: WikiData.wiki_body,
+  private: true,
+  user: users.sample
+  )
+end
+
+#Create Public Wikis
 25.times do
   Wiki.create!(
   title: WikiData.wiki_title,
   body: WikiData.wiki_body,
   private: false,
-  user: john
+  user: users.sample
   )
 end
 

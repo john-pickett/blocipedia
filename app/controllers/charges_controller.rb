@@ -39,8 +39,22 @@ class ChargesController < ApplicationController
  end
 
  def downgrade
-   current_user.standard!
-   redirect_to current_user
+   @user = current_user
+   @user.standard!
+
+   if @user.save
+     flash[:notice] = "Your account has been downgraded to Standard. /sad trombone sound =("
+   else
+     flash[:alert] = "An error occured. Please try again."
+   end
+
+   @user_wikis = @user.wikis.where(private: true)
+
+   @user_wikis.each do |wiki|
+     wiki.update_attributes(private: false)
+   end
+
+   redirect_to wikis_path
  end
 
 end
