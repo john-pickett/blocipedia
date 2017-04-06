@@ -42,7 +42,8 @@ class WikisController < ApplicationController
     @wiki.assign_attributes(wiki_params)
 
     if @wiki.save
-      redirect_to @wiki, notice: "Wiki updated!"
+      flash[:notice] = "Wiki updated!"
+      redirect_to @wiki
     else
       flash.now[:alert] = "Error occured. Try again."
       render :edit
