@@ -1,10 +1,7 @@
 class WikisController < ApplicationController
 
   def index
-    @wikis = Wiki.all
-    @private_wikis = @wikis.visible_to(current_user)
-    @user_wikis = @wikis.user_wikis(current_user)
-    @public_wikis = @wikis.public_wikis(@wikis)
+    @policy_wikis = policy_scope(Wiki)
   end
 
   def show
@@ -32,6 +29,7 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    @get_wikis = Collaborator.where(wiki_id: @wiki.id)
   end
 
   def update
@@ -39,7 +37,8 @@ class WikisController < ApplicationController
     @wiki.assign_attributes(wiki_params)
 
     if @wiki.save
-      redirect_to @wiki, notice: "Wiki updated!"
+      flash[:notice] = "Wiki updated!"
+      redirect_to @wiki
     else
       flash.now[:alert] = "Error occured. Try again."
       render :edit
@@ -62,6 +61,9 @@ class WikisController < ApplicationController
 
   def wiki_params
     params.require(:wiki).permit(:user_id, :title, :body, :private)
+  end
+
+  def find_wiki_author()
   end
 
 end
