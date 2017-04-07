@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :charges, only: [:new, :create]
 
   resources :wikis do
-    resources :collaborators, only: [:new, :create, :destroy]
+    resources :collaborators, only: [:index, :create, :destroy]
   end
 
   get "downgrade", to: "charges#downgrade"

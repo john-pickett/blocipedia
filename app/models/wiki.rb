@@ -9,5 +9,13 @@ class Wiki < ActiveRecord::Base
 
   has_many :collaborators
   has_many :users, through: :collaborators
-  
+
+  def collaborator_for(user)
+    collaborators.find_by(user_id: user.id)
+  end
+
+  def public?
+    !private?
+  end
+
 end
