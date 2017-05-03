@@ -1,5 +1,6 @@
 class Wiki < ActiveRecord::Base
 
+  before_save :set_attributes
   default_scope { order('created_at DESC') }
   scope :public_wikis, -> (wikis) { where private: false }
   scope :user_wikis, -> (user) { where user_id: user.id }
@@ -16,6 +17,10 @@ class Wiki < ActiveRecord::Base
 
   def public?
     !private?
+  end
+
+  def set_attributes
+    self.private = false if self.private.nil?
   end
 
 end
