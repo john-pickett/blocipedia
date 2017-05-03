@@ -3,10 +3,10 @@
     <h4 class="media-heading">
       <%= link_to wiki.title, wiki %>
     </h4>
-    <% if wiki.private? && current_user.id == wiki.user_id %>
+    <% if current_user && wiki.private? && current_user.id == wiki.user_id %>
       <h5>Private Wiki - Author
       </h5>
-    <% elsif wiki.private? && current_user.id != wiki.user_id %>
+    <% elsif current_user && wiki.private? && current_user.id != wiki.user_id %>
       <h5> Private Wiki - Access Granted By Wiki Author
       </h5>
     <% else %>
