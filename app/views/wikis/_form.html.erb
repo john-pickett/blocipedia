@@ -15,6 +15,7 @@
         <% end %>
       <% else %>
         <p>Standard users can only create public wikis. To create unlimited private wikis, <%= link_to 'upgrade your account.', edit_user_registration_path %></p>
+        <%= f.hidden_field :private, :value => false %>
   </div>
      <% end %>  <!-- end of private wiki loop -->
 
